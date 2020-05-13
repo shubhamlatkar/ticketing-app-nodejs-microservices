@@ -18,12 +18,13 @@ router.post(
     const errors = validationResult(req);
     console.log("errors", errors);
     if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array());
+      throw new Error("Wrong email or pass");
     }
     const { email, password } = req.body;
 
     console.log("Creating user");
-    res.send("signup");
+    throw new Error("Error in db");
+    // res.send("signup");
   }
 );
 

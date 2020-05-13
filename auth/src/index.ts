@@ -5,6 +5,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signupRouter } from "./routes/signup";
 import { signoutRouter } from "./routes/signout";
+import { errorHandler } from "./middlewares/error-handler";
 
 const app = express();
 app.use(json());
@@ -15,6 +16,7 @@ app.use(signinRouter);
 app.use(signupRouter);
 app.use(signoutRouter);
 
+app.use(errorHandler);
 app.get("/", (request, response) => {
   response.send("<h1>Ticketing Auth</h1>");
 });
