@@ -12,7 +12,8 @@ Microservices based project uses a number of open libraries work properly:
 * [Bootstrap] - For UI boilerplate 
 * [mongoosejs] - For mongodb interaction
 * [mongodb] - NoSql DB storing and managinf data 
-* [kubernetes] - For container-orchestration 
+* [kubernetes] - For container-orchestration.
+* [skaffold] - Skaffold for the pods depl. 
 
 
 ### Tools
@@ -28,8 +29,8 @@ Below are the steps to bring up the development environment and get started.
 
 1) Install Git, NodeJS, npm and Docker</br>
 2) For the project using https://github.com/shubhamlatkar/ticketing-app-nodejs-microservices</br>
-3) Clone the fork using </br>
-4) Execute docker files</br>
+3) Clone the fork.</br>
+4) Execute docker files.</br>
 5) Then deploy to [kubernetes] .</br>
 6) Access the Application at http://localhost/</br></br>
 
@@ -45,4 +46,5 @@ Below are the steps to bring up the development environment and get started.
    [kubernetes]: <https://kubernetes.io/>
    [mongoosejs]: <https://mongoosejs.com/>
    [npm]: <https://www.npmjs.com/>
+   [skaffold]: <https://skaffold.dev/>
    
