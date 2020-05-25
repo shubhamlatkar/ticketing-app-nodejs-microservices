@@ -1,4 +1,5 @@
 import express from "express";
+import cookieSession from "cookie-session";
 import { json } from "body-parser";
 import "express-async-errors";
 import { dbConnection } from "./middlewares/db-connection";
@@ -10,7 +11,14 @@ import { errorHandler } from "./middlewares/error-handler";
 import { NotFoundError } from "./errors/not-found";
 
 const app = express();
+app.set("trust proxy", true);
 app.use(json());
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true
+  })
+);
 const port = parseInt(process.env.PORT, 10) || 3000;
 
 app.use(currentUserRouter);
@@ -28,6 +36,9 @@ app.use(errorHandler);
 dbConnection();
 
 const start = () => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("no key");
+  }
   app.listen(port, function() {
     console.log("Listening  on port 3000");
   });
