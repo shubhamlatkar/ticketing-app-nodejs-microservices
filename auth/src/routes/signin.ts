@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { bcrypt } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { body } from "express-validator";
 import { validateRequest } from "../middlewares/validate-request";
 import { User } from "../models/user";
