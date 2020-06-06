@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import axios from "axios";
-
+import userRequest from "../../hooks/user-request";
 export default () => {
   const [signupObj, setSignupobj] = useState({
     email: "",
     password: ""
   });
-  const [errors, setErrors] = useState([]);
+
+  const { doRequest, errors } = userRequest({
+    url: "https://7st5d.sse.codesandbox.io/api/users/signup",
+    method: "post",
+    body: {
+      email: signupObj.email,
+      password: signupObj.password
+    }
+  });
 
   const onchangeHandler = event => {
     event.preventDefault();
@@ -16,19 +23,7 @@ export default () => {
 
   const onSubmitHandler = async event => {
     event.preventDefault();
-    let { email, password } = signupObj;
-    try {
-      let res = await axios.post(
-        "https://7st5d.sse.codesandbox.io/api/users/signup",
-        {
-          email: email,
-          password: password
-        }
-      );
-      console.log("res", res);
-    } catch (err) {
-      setErrors(err.response && err.response.data.errors);
-    }
+    doRequest();
   };
   return (
     <form className="container">
@@ -53,17 +48,7 @@ export default () => {
           className="form-control"
         />
       </div>
-      <div className="row">
-        {errors !== []
-          ? errors.map((error, index) => {
-              return (
-                <div className="alert alert-danger" role="alert" key={index}>
-                  {error.message}
-                </div>
-              );
-            })
-          : null}
-      </div>
+      <div className="row">{errors ? errors : null}</div>
       <div>
         <button onClick={onSubmitHandler} className="btn btn-primary">
           Sign up
