@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Router from "next/router";
 import userRequest from "../../hooks/user-request";
 export default () => {
   const [signupObj, setSignupobj] = useState({
@@ -12,7 +13,8 @@ export default () => {
     body: {
       email: signupObj.email,
       password: signupObj.password
-    }
+    },
+    onSuccess: () => Router.push("/")
   });
 
   const onchangeHandler = event => {
