@@ -7,15 +7,7 @@ export default () => {
     password: ""
   });
 
-  const { doRequest, errors } = userRequest({
-    url: "https://7st5d.sse.codesandbox.io/api/users/signup",
-    method: "post",
-    body: {
-      email: signupObj.email,
-      password: signupObj.password
-    },
-    onSuccess: () => Router.push("/")
-  });
+  const { doRequest, errors } = userRequest();
 
   const onchangeHandler = event => {
     event.preventDefault();
@@ -25,7 +17,15 @@ export default () => {
 
   const onSubmitHandler = async event => {
     event.preventDefault();
-    doRequest();
+    doRequest({
+      url: "https://7st5d.sse.codesandbox.io/api/users/signup",
+      method: "post",
+      body: {
+        email: signupObj.email,
+        password: signupObj.password
+      },
+      onSuccess: () => Router.push("/")
+    });
   };
   return (
     <form className="container">

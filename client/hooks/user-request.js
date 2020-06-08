@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default ({ url, method, body, onSuccess }) => {
+export default () => {
   const [errors, setErrors] = useState(null);
 
-  const doRequest = () => {
+  const doRequest = ({ url, method, body, onSuccess }) => {
     axios[method](url, body)
       .then(res => {
         if (onSuccess) onSuccess();
