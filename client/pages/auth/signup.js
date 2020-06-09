@@ -17,8 +17,12 @@ export default () => {
 
   const onSubmitHandler = async event => {
     event.preventDefault();
+    let url = event.target.innerHTML.includes("Log")
+      ? "https://7st5d.sse.codesandbox.io/api/users/signin"
+      : "https://7st5d.sse.codesandbox.io/api/users/signup";
+    console.log(url);
     doRequest({
-      url: "https://7st5d.sse.codesandbox.io/api/users/signup",
+      url: url,
       method: "post",
       body: {
         email: signupObj.email,
@@ -27,9 +31,10 @@ export default () => {
       onSuccess: () => Router.push("/")
     });
   };
+
   return (
     <form className="container">
-      <h1>signup</h1>
+      <h1>Log In</h1>
       <div>
         <label>Email</label>
         <input
@@ -54,6 +59,9 @@ export default () => {
       <div>
         <button onClick={onSubmitHandler} className="btn btn-primary">
           Sign up
+        </button>
+        <button onClick={onSubmitHandler} className="btn btn-primary">
+          Log In
         </button>
       </div>
     </form>

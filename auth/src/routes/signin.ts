@@ -21,6 +21,7 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
+    console.log("req", req);
     let existingUser = await User.findOne({ email });
 
     if (!existingUser) throw new BadRequestError("Invalid cred");
@@ -35,7 +36,8 @@ router.post(
       },
       process.env.JWT_SECRET!
     );
-
+    // res.cookie("jwt", userJWT);
+    // res.end("jwt" + userJWT);
     req.session = {
       jwt: userJWT
     };

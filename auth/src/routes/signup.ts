@@ -23,7 +23,7 @@ router.post(
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new BadRequestError("Email already in user");
+      throw new BadRequestError("Email already in use");
     }
     const user = User.build({ email, password });
     let resp = await user.save();
@@ -39,6 +39,7 @@ router.post(
     req.session = {
       jwt: userJWT
     };
+    console.log("resp", resp);
     res.status(201).send(resp);
   }
 );

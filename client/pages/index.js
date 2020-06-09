@@ -16,7 +16,7 @@ IndexPage.getInitialProps = async context => {
   // return data;
   let responseData = null;
   if (typeof window === "undefined") {
-    const { data } = Axios.get(
+    const { data } = await Axios.get(
       "https://7st5d.sse.codesandbox.io/api/users/currentUser",
       {
         headers: context.req.headers
