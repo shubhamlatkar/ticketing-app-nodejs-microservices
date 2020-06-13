@@ -20,7 +20,6 @@ export default () => {
     let url = event.target.innerHTML.includes("Log")
       ? "https://7st5d.sse.codesandbox.io/api/users/signin"
       : "https://7st5d.sse.codesandbox.io/api/users/signup";
-    console.log(url);
     doRequest({
       url: url,
       method: "post",

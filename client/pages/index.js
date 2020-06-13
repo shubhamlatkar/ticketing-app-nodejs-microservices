@@ -15,6 +15,7 @@ IndexPage.getInitialProps = async context => {
   // const { data } = await userAxios.get("/api/users/currentUser");
   // return data;
   let responseData = null;
+
   if (typeof window === "undefined") {
     const { data } = await Axios.get(
       "https://7st5d.sse.codesandbox.io/api/users/currentUser",
@@ -26,13 +27,20 @@ IndexPage.getInitialProps = async context => {
       .catch(err => err);
     responseData = data;
   } else {
+    let token = localStorage.getItem("token");
+    token = "Bearer " + token;
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: token
+    };
     const { data } = await Axios.get(
-      "https://7st5d.sse.codesandbox.io/api/users/currentUser"
+      "https://7st5d.sse.codesandbox.io/api/users/currentUser",
+      { headers: headers }
     )
       .then(res => res)
       .catch(err => err);
-    responseData = data;
+    return data;
   }
-  return { responseData };
+  return { ...responseData };
 };
 export default IndexPage;

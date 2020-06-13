@@ -8,6 +8,8 @@ export default () => {
     axios[method](url, body)
       .then(res => {
         if (onSuccess) onSuccess();
+        let { token } = res.data;
+        localStorage.setItem("token", token);
         return res.data;
       })
       .catch(err => {
