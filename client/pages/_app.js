@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from "axios";
+import Header from "./header";
 
 const AppComponent = ({ Component, currentUser, pageProps }) => {
   console.log("currentUser app", currentUser);
   return (
     <div>
-      <h1>Heading {currentUser && currentUser.email}</h1>
+      <Header currentUser={currentUser && currentUser.email} />
       <Component {...pageProps} />
     </div>
   );
