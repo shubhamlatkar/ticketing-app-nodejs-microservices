@@ -19,17 +19,24 @@ export const currentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  if(!req.session?.jwt) {
-    console.log("payload", req.session);
-    return next();
-  }
-  try {
-    const payload = jwt.verify(req.session.jwt,process.env.JWT_SECRET!) as UserPaylod;
-    console.log("payload", payload);
-    req.currentUser = payload;
-  } catch(err) {
-    next();
-  }
+  let payload = null;
+  console.log("payload 0", req.session);
 
-    next(); 
+  if(!req.session?.jwt) {
+    try {
+      const token = req.header("Authorization").replace("Bearer ", "");
+      payload = jwt.verify(token, process.env.JWT_SECRET) as UserPaylod;
+      req.currentUser = payload;
+    } catch(err) {
+      next();
+    }
+  } else {
+    try {
+      payload = jwt.verify(req.session.jwt,process.env.JWT_SECRET!) as UserPaylod;
+     req.currentUser = payload;
+   } catch(err) {
+     next();
+   }
+  }
+  next(); 
 };

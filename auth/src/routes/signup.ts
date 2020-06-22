@@ -2,8 +2,7 @@ import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { body } from "express-validator";
 import { User } from "../models/user";
-import { BadRequestError } from "../errors/bad-request-error";
-import { validateRequest } from "../middlewares/validate-request";
+import { BadRequestError, validateRequest } from "@sgtickets/common";
 
 const router = express.Router();
 
@@ -35,12 +34,10 @@ router.post(
       },
       process.env.JWT_SECRET!
     );
-
     req.session = {
       jwt: userJWT
     };
-    console.log("resp", resp);
-    res.status(201).send(resp);
+    res.status(201).send({ resp, token: userJWT });
   }
 );
 

@@ -6,7 +6,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signupRouter } from "./routes/signup";
 import { signoutRouter } from "./routes/signout";
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandler } from "@sgtickets/common";
 import { NotFoundError } from "./errors/not-found";
 
 const app = express();

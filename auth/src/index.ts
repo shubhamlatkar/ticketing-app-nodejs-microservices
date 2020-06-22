@@ -1,5 +1,5 @@
 import app from "./app";
-import { dbConnection } from "./middlewares/db-connection";
+import { dbConnection } from "@sgtickets/common";
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 
